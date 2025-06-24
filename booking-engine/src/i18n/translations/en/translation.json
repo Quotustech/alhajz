@@ -43,7 +43,7 @@
       "emailLabel": "Email address",
       "emailPlaceholder": "you@example.com",
       "passwordLabel": "Password",
-      "passwordHelp": "Password must contain at least 8 characters including one uppercase letter, one special character, and three numbers.",
+      "passwordHelp": "Password must contain at least 8 characters including one uppercase letter, one lowercase letter, one number and one special character.",
       "createAccountButton": "Create Account",
       "alreadyHaveAccount": "Already have an account?",
       "signIn": "Sign in",
@@ -158,6 +158,39 @@
     "subscribeButton": "Subscribe",
     "copyright": "{year} TripSwift - All rights reserved"
   },
+  "Profile": {
+    "editProfile": "Edit Profile",
+    "signOut": "Sign Out",
+    "overview": "Overview",
+    "myTrips": "My Trips",
+    "preferences": "Preferences",
+    "security": "Security",
+    "notifications": "Notifications",
+    "helpCenter": "Help Center",
+    "tripsCompleted": "Trips Completed",
+    "sinceJoining": "Since joining",
+    "averageRating": "Average Rating",
+    "fromHosts": "From hosts",
+    "savedPlaces": "Saved Places",
+    "wishlisted": "Wishlisted",
+    "quickActions": "Quick Actions",
+    "bookTrip": "Book Trip",
+    "savedPlacesAction": "Saved Places",
+    "rewards": "Rewards",
+    "deals": "Deals",
+    "securitySettings": "Security Settings",
+    "changePassword": "Change Password",
+    "updatePassword": "Update your password",
+    "twoFactorAuth": "Two-Factor Authentication",
+    "twoFactorDesc": "Add an extra layer of security to your account",
+    "enable2FA": "Enable 2FA",
+    "profileUpdatedSuccess": "Profile updated successfully",
+    "profileUpdateFailed": "Failed to update profile",
+    "contentComingSoon": "Content for {{tab}} coming soon...",
+    "newPasswordOptional": "New Password (optional)",
+    "confirmNewPassword": "Confirm New Password",
+    "joined": "Joined {{date}}"
+  },
   "HotelCard": {
     "heroTitle": "Find the Perfect Stay for Your Journey",
     "heroSubtitle": "Discover amazing accommodations at exclusive prices",
@@ -166,7 +199,11 @@
     "specialOffer": "Special offer: Get up to 25% off on your first booking!",
     "errorNoHotels": "No hotels available for the selected location.",
     "errorInvalidLocation": "Please enter a valid location.",
-    "errorSelectDates": "Please select both check-in and check-out dates."
+    "errorSelectDates": "Please select both check-in and check-out dates.",
+    "exclusiveOffers": "Exclusive Offers Available",
+    "freeCancellation": "Free Cancellation",
+    "bestPriceGuarantee": "Best Price Guarantee",
+    "downloadourapp": "Download Our App"
   },
   "HotelListing": {
     "CompactSearchBar": {
@@ -174,6 +211,7 @@
       "checkInPlaceholder": "Check-in",
       "checkOutPlaceholder": "Check-out",
       "searchButton": "Search",
+      "errorSameDates": "Check-in and check-out dates cannot be the same.",
       "errorInvalidLocation": "Please enter a valid location.",
       "errorSelectDates": "Please select both check-in and check-out dates.",
       "errorNoHotels": "No hotels available for the selected location.",
@@ -217,7 +255,7 @@
     "freeWifi": "Free WiFi",
     "parking": "Parking",
     "breakfast": "Breakfast",
-    "searchPropertyName": "Search property name",
+    "searchPropertyName": "Search property by name",
     "sortBy": "Sort by",
     "recommended": "Recommended",
     "highestRating": "Highest Rating",
@@ -242,8 +280,8 @@
       "propertyRating": "Property Rating",
       "amenities": "Amenities",
       "sortBy": "Sort By",
-      "cancel": "Cancel",
-      "applyFilters": "Apply Filters",
+      "cancel": "Clear all filters",
+      "applyFilters": "See {{count}} results",
       "ariaCloseModal": "Close modal",
       "ariaSortOrder": "Sort order",
       "ratingUp": "& Up",
@@ -315,33 +353,10 @@
     },
     "ExploreDestinations": {
       "title": "Explore Destinations",
-      "exploreNow": "Explore Now",
-      "destinations": {
-        "maldives": {
-          "name": "Maldives",
-          "category": "Beach Paradise"
-        },
-        "swissAlps": {
-          "name": "Swiss Alps",
-          "category": "Adventure"
-        },
-        "santorini": {
-          "name": "Santorini",
-          "category": "Romantic Getaway"
-        },
-        "dubai": {
-          "name": "Dubai",
-          "category": "Luxury"
-        },
-        "bali": {
-          "name": "Bali",
-          "category": "Cultural"
-        },
-        "tokyo": {
-          "name": "Tokyo",
-          "category": "City Life"
-        }
-      }
+      "descriptionTemplate": "Explore hotels in {{city}}",
+      "imageAlt": "{{name}} destination",
+      "goToGroup": "Go to group {{count}}",
+      "exploreNow": "Explore Now"
     }
   },
   "RoomsPage": {
@@ -351,6 +366,10 @@
     "aboutThisProperty": "About this property",
     "noImagesAvailable": "No images available",
     "propertyAmenities": "Property Amenities",
+    "nights": "Night",
+    "nightsPlural": "Nights",
+    "stay": "stay",
+    "filter": "Filter",
     "amenitiesList": {
       "wifi": "Free Wifi",
       "swimming_pool": "Swimming Pool",
@@ -369,13 +388,15 @@
     "noAmenitiesSpecified": "No amenities specified for this property.",
     "contactInformation": "Contact Information",
     "allRooms": "All Rooms",
-    "searchRoomName": "Search room name",
+    "searchRoomName": "Search room by name",
     "availableRooms": "Available Rooms",
-    "showingRooms_one": "Showing {count} room",
-    "showingRooms_other": "Showing {count} rooms",
+    "showingRooms_one": "Showing {{count}} room",
+    "showingRooms_other": "Showing {{count}} rooms",
     "noRoomsAvailableTitle": "No Rooms Available",
     "noRoomsAvailableMessage": "We couldn't find any rooms matching your criteria. Try adjusting your search filters or dates.",
     "clearFilters": "Clear Filters",
+    "loadingRoomsMessage": "Loading available rooms...",
+    "priceNotAvailable": "",
     "qrCode": {
       "discountTitle": "Use Your Discount",
       "qrCodeAlt": "Discount QR Code",
@@ -394,11 +415,25 @@
       "night": "night",
       "bookNow": "Book Now",
       "viewBookingPolicies": "View booking policies",
+      "notAvailable": "Not Available",
       "securePayment": "Secure payment",
       "amenities": {
         "wifi": "Free WiFi",
         "airConditioning": "Air Conditioning",
-        "kingBed": "King Bed"
+        "kingBed": "King Bed",
+        "smokingBan": "No Smoking",
+        "view": "Scenic View",
+        "bathroom": "Private Bathroom",
+        "towels": "Towels Provided",
+        "linens": "Bed Linens",
+        "tableChairs": "Table and Chairs",
+        "desk": "Work Desk",
+        "dresserWardrobe": "Dresser/Wardrobe",
+        "sofaSeating": "Sofa Seating",
+        "television": "Television",
+        "telephone": "Telephone",
+        "heating": "Heating",
+        "default": "Amenity"
       },
       "policies": {
         "title": "Booking Policies",
@@ -421,6 +456,50 @@
       }
     }
   },
+  "CancellationPolicies": {
+    "policyTypes": {
+      "flexible": {
+        "description": "Free cancellation until 24 hours before check-in. After that, the reservation is non-refundable.",
+        "shortDescription": "Free cancellation until 24 hours before check-in",
+        "bulletPoints": [
+          "Full refund: If cancelled more than 24 hours before check-in",
+          "No refund: If cancelled within 24 hours of check-in"
+        ]
+      },
+      "moderate": {
+        "description": "Full refund if cancelled 5+ days before check-in. 50% refund between 1-5 days before check-in. No refund within 24 hours of check-in.",
+        "shortDescription": "Free cancellation until 5 days before check-in",
+        "bulletPoints": [
+          "Full refund: If cancelled 5+ days before check-in",
+          "50% refund: If cancelled 1-5 days before check-in",
+          "No refund: If cancelled within 24 hours of check-in"
+        ]
+      },
+      "strict": {
+        "description": "Full refund if cancelled 7+ days before check-in. 50% refund if cancelled 1-7 days before check-in. No refund within 24 hours of check-in.",
+        "shortDescription": "Free cancellation until 7 days before check-in",
+        "bulletPoints": [
+          "Full refund: If cancelled 7+ days before check-in",
+          "50% refund: If cancelled 1-7 days before check-in",
+          "No refund: If cancelled within 24 hours of check-in"
+        ]
+      },
+      "nonrefundable": {
+        "description": "This booking is non-refundable. No refund will be provided regardless of cancellation timing.",
+        "shortDescription": "Non-refundable rate",
+        "bulletPoints": [
+          "No refund: This booking is non-refundable at any time",
+          "Non-refundable bookings typically come with a discounted rate"
+        ]
+      }
+    },
+    "roomCardPolicyDescriptions": {
+      "flexible": "Free cancellation up to 24h before check-in",
+      "moderate": "Free cancellation up to 5 days before check-in",
+      "strict": "Free cancellation up to 7 days before check-in",
+      "nonrefundable": "Non-refundable rate with special discount"
+    }
+  },
   "BookingComponents": {
     "GuestInformationModal": {
       "completeYourBooking": "Complete Your Booking",
@@ -428,25 +507,28 @@
       "reviewAndPayStep": "Review & Pay",
       "roomSummary": "Room Summary",
       "roomType": "Room Type",
-      "checkIn": "Check-in",
-      "checkOut": "Check-out",
+      "checkIn": "Check-In",
+      "checkOut": "Check-Out",
       "nights": "Night",
       "nightsPlural": "Nights",
       "guestInformation": "Guest Information",
+      "dob": "Date Of Birth",
       "firstNameLabel": "First Name",
       "firstNamePlaceholder": "Enter your first name",
-      "firstNameError": "First Name is required and should only contain letters and spaces.",
+      "firstNameError": "First Name is required",
       "lastNameLabel": "Last Name",
       "lastNamePlaceholder": "Enter your last name",
-      "lastNameError": "Last Name is required and should only contain letters and spaces.",
+      "lastNameError": "Last Name is required ",
       "emailLabel": "Email Address",
       "emailPlaceholder": "your.email@example.com",
       "emailInfo": "Your booking confirmation will be sent to this email address",
-      "emailError": "Please enter a valid email address.",
+      "emailError": "Email is required.",
+      "emailInvalidError": "Please enter a valid email address",
       "phoneLabel": "Phone Number",
       "phonePlaceholder": "Enter phone number",
       "phoneInfo": "For booking-related notifications",
       "phoneError": "Phone number is required",
+      "phoneLengthError": "Phone number for India must be exactly 10 digits.",
       "guestDetailsSection": "Guest Details",
       "roomSingular": "Room",
       "roomsPlural": "Rooms",
@@ -454,6 +536,8 @@
       "adultsPlural": "Adults",
       "childSingular": "Child",
       "childrenPlural": "Children",
+      "infantSingular": "Infant",
+      "infantsPlural": "Infants",
       "guestDisplayFormat": "Rooms and Guests",
       "childrenPartFormat": "Children",
       "informationVerified": "Information verified successfully!",
@@ -461,9 +545,15 @@
       "bookingSummary": "Booking Summary",
       "stayDetails": "Stay Details",
       "primaryGuest": "Primary Guest",
+      "guests": "Guests",
+      "email": "Email",
+      "phone": "Phone",
       "priceDetails": "Price Details",
       "roomRate": "Room Rate",
       "totalAmount": "Total Amount",
+      "baseRatePerRoomPerNight": "Base Rate (per room per night)",
+      "additionalGuestCharges": "Additional Guest Charges",
+      "priceIncludes": "Price includes {{rooms}} rooms for {{guests}} guests",
       "paymentNoticeTitle": "Payment will be processed securely",
       "paymentNoticeDescription": "By proceeding, you agree to our terms and conditions and privacy policy.",
       "backToDetails": "Back to Details",
@@ -570,10 +660,13 @@
       "keepMyReservation": "Keep My Reservation",
       "processing": "Processing...",
       "confirmCancellationButton": "Confirm Cancellation",
-      "invalidDate": "Invalid Date"
+      "invalidDate": "Invalid Date",
+      "cancellationProcessedSuccess": "Reservation cancellation processed successfully",
+      "cancellationFailed": "Cancellation failed",
+      "checkInDatePassed": "Can't cancel reservation. Your check-in date already passed."
     },
     "AmendReservationModal": {
-      "title": "Amend Your Reservation",
+      "title": "Update Your Reservation",
       "subtitle": "Make changes to your upcoming stay at {{propertyName}}",
       "currentBookingDetails": "Current Booking Details",
       "stayDates": "Stay Dates",
@@ -586,6 +679,7 @@
       "bestAvailableRate": "Best Available Rate",
       "total": "total",
       "whatToChange": "What would you like to change?",
+      "estimatedTotal": "Estimated Total",
       "amendmentTypes": {
         "dates": "Dates",
         "guests": "Guests",
@@ -622,7 +716,7 @@
       "additionalChargeExplanation": "Your changes will result in an additional charge of ₹{{amount}}",
       "refundToBeProcessed": "Refund to be processed",
       "refundExplanation": "Your changes will result in a refund of ₹{{amount}}",
-      "amendmentPolicies": "Amendment Policies",
+      "amendmentPolicies": "Update Policies",
       "policies": {
         "dateChanges": "Date changes are subject to availability",
         "changes72Hours": "Changes within 72 hours of check-in may incur additional fees",
@@ -631,13 +725,20 @@
       },
       "cancel": "Cancel",
       "processing": "Processing...",
-      "confirmAmendment": "Confirm Amendment",
+      "confirmAmendment": "Confirm Update",
       "errors": {
         "selectValidDates": "Please select valid check-in and check-out dates.",
-        "unableToAmend": "Unable to amend booking. Please try again or contact support."
+        "unableToAmend": "Unable to update booking. Please try again or contact support.",
+        "invalidFirstName": "First Name is required ",
+        "invalidLastName": "Last Name is required ",
+        "dobRequired": "Date of Birth is required.",
+        "selectRoomType": "Please select a room type.",
+        "selectRatePlan": "Please select a rate plan.",
+        "invalidDateRange": "Check-out date must be after check-in date.",
+        "correctFormErrors": "Please correct the errors in the form before submitting."
       },
       "success": {
-        "reservationAmended": "Your reservation has been successfully amended.",
+        "reservationAmended": "Your reservation has been successfully updated.",
         "additionalPayment": "An additional payment of ₹{{amount}} will be processed.",
         "refundProcessed": "A refund of ₹{{amount}} will be processed.",
         "noChange": "There is no change in the total price."
@@ -672,13 +773,15 @@
         "cancelled": "Cancelled"
       },
       "stayDetails": "Stay Details",
-      "checkIn": "Check-in",
-      "checkOut": "Check-out",
+      "checkIn": "Check-In",
+      "checkOut": "Check-Out",
       "duration": "Duration",
       "nightsStay_one": "{{count}} Night",
       "nightsStay_other": "{{count}} Nights",
       "roomType": "Room Type",
       "roomName": "Room Name",
+      "roomsSingular": "Room",
+      "roomsPlural": "Rooms",
       "guestDetails": "Guest Details",
       "guestName": "Guest Name",
       "contactNumber": "Contact Number",
@@ -701,7 +804,9 @@
       "ratePlan": "Rate Plan",
       "modifyBooking": "Modify Booking",
       "cancelBooking": "Cancel Booking",
-      "printItinerary": "Print Itinerary"
+      "printItinerary": "Print Itinerary",
+      "rooms": "Rooms",
+      "dob": "Date Of Birth"
     }
   },
   "Payment": {
@@ -723,6 +828,8 @@
         "adults": "Adults",
         "child": "Child",
         "children": "Children",
+        "infant": "Infant",
+        "infants": "Infants",
         "guest": "Guest"
       },
       "paymentMethod": {
@@ -768,10 +875,13 @@
         "cardSetupFailedError": "Card setup failed",
         "processing": "Processing...",
         "confirmBooking": "Confirm Booking",
-        "paymentProcessingError": "An error occurred during payment processing"
+        "paymentProcessingError": "An error occurred during payment processing",
+        "footer": "Your card details are encrypted and securely processed by Stripe. We never store your full card information on our servers."
       }
     },
     "PaymentSuccess": {
+      "noBookingDataForDownload": "No booking data available for download.",
+      "downloadSuccessToast": "Booking confirmation downloaded successfully!",
       "processingBooking": "Processing your booking...",
       "confirmingReservation": "We're confirming your reservation. This should only take a moment.",
       "bookingFailedTitle": "Booking Failed",
@@ -789,6 +899,7 @@
       "guestNameLabel": "Guest Name",
       "guestDefaultName": "Guest",
       "emailLabel": "Email",
+      "phoneLabel": "Phone Number",
       "paymentMethodLabel": "Payment Method",
       "paymentMethodCreditCard": "Credit Card",
       "paymentMethodPayAtHotel": "Pay at Hotel",
@@ -811,5 +922,27 @@
       "contactSupportButton": "Contact Support",
       "exploreMoreHotels": "Explore more hotel options"
     }
+  },
+  "GuestBox": {
+    "guests": "Guests",
+    "adultsPlural": "Adults",
+    "adultSingular": "Adult",
+    "infantsPlural": "Infants",
+    "infantSingular": "Infant",
+    "roomsPlural": "Rooms",
+    "roomSingular": "Room",
+    "childrenPlural": "Children",
+    "childSingular": "Child",
+    "age": "Age",
+    "yearSingular": "year",
+    "yearPlural": "years",
+    "selectAge": "Select age",
+    "selectGuests": "Select Guests",
+    "ages": "Ages",
+    "cancel": "Cancel",
+    "apply": "Apply",
+    "defaultText": "1 Room · 1 Adult · 0 Children",
+    "maxGuestsError": "Maximum {{maxGuests}} guests allowed per room. Please add more rooms or reduce guests.",
+    "selectAgeError": "Please select the age for all children and infants"
   }
 }

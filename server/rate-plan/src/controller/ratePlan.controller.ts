@@ -115,12 +115,14 @@ class RoomPrice {
         return response
     }
     public static async getRoomRentController(req: Request, res: Response, next: NextFunction) {
-        const { hotelCode, invTypeCode,
+        const { 
+            hotelCode, 
+            invTypeCode,
             startDate,
             endDate,
             noOfChildrens,
             noOfAdults,
-            noOfRooms,children_ages } = req.body
+            noOfRooms } = req.body
         const response = await RoomRentCalculationService.getRoomRentService(hotelCode,
             invTypeCode,
             startDate,
@@ -129,6 +131,7 @@ class RoomPrice {
             noOfAdults,
             noOfRooms
         )
+        console.log(response)
         return response
     }
     public static async getAllRoomTypeController(){

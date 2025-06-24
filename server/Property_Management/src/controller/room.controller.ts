@@ -37,7 +37,7 @@ interface RedirectParams {
 
 interface RedirectQuery {
   coupon?: string;
-} 
+}
 
 // create room
 const createRoom = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
@@ -302,7 +302,7 @@ const getRoomsByPropertyId2 = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const propertyInfoId = req.params.id;
     const { startDate, endDate, hotelCode = "WINCLOUD" } = req.body;
-
+    console.log(startDate, endDate)
     // Validate mandatory fields
     if (!startDate) {
       return next(new AppError("startDate is required", 400));
@@ -324,7 +324,7 @@ const getRoomsByPropertyId2 = catchAsync(
           propertyInfo_id: new mongoose.Types.ObjectId(propertyInfoId)
         }
       },
-      
+
       // Lookup and process rate information in one go
       {
         $lookup: {
@@ -337,8 +337,7 @@ const getRoomsByPropertyId2 = catchAsync(
                   $and: [
                     { $eq: ["$invTypeCode", "$$roomType"] },
                     { $eq: ["$hotelCode", hotelCode] },
-                    { $lte: ["$startDate", new Date(endDate)] },
-                    { $gte: ["$endDate", new Date(startDate)] }
+                    { $eq: ["$startDate", new Date(startDate)] },
                   ]
                 }
               }
@@ -350,34 +349,45 @@ const getRoomsByPropertyId2 = catchAsync(
                 room_price: { $arrayElemAt: ["$baseByGuestAmts.amountBeforeTax", 0] },
                 currency_code: "$currencyCode",
                 rate_plan_code: "$ratePlanCode",
-                available_guest_rates: "$baseByGuestAmts"
+                available_guest_rates: "$baseByGuestAmts",
+                rate_images: "$image" 
               }
             }
           ],
           as: "rateInfo"
         }
       },
-      
-      // Final projection
       {
         $project: {
           _id: 1,
+          propertyInfo_id: 1,
           room_name: 1,
           room_type: 1,
-          room_description: 1,
-          room_amenities: 1,
-          room_images: 1,
-          max_occupancy: 1,
-          bed_type: 1,
+          total_room: 1,
+          available_rooms: 1,
+          floor: 1,
+          room_view: 1,
           room_size: 1,
-          propertyInfo_id: 1,
+          room_unit: 1,
+          smoking_policy: 1,
+          max_occupancy: 1,
+          max_number_of_adults: 1,
+          max_number_of_children: 1,
+          number_of_bedrooms: 1,
+          number_of_living_room: 1,
+          extra_bed: 1,
+          description: 1,
+          image: 1, 
+          available: 1,
+          rateplan_created: 1,
           createdAt: 1,
           updatedAt: 1,
           __v: 1,
           room_price: { $arrayElemAt: ["$rateInfo.room_price", 0] },
           currency_code: { $arrayElemAt: ["$rateInfo.currency_code", 0] },
           rate_plan_code: { $arrayElemAt: ["$rateInfo.rate_plan_code", 0] },
-          
+          available_guest_rates: { $arrayElemAt: ["$rateInfo.available_guest_rates", 0] },
+          rate_images: { $arrayElemAt: ["$rateInfo.rate_images", 0] }, 
           has_valid_rate: { $gt: [{ $size: "$rateInfo" }, 0] }
         }
       }
@@ -390,7 +400,7 @@ const getRoomsByPropertyId2 = catchAsync(
     }
 
     const couponCode = await generateCouponCode();
-    const deepLinkUrl = `${process.env.DEEP_LINK}/property/${propertyInfoId}?coupon=${couponCode.code}`;
+    const deepLinkUrl = `${process.env.DEEP_LINK}/property/${propertyInfoId}?coupon=${couponCode.code}&startDate=${startDate}&endDate=${endDate}`;
 
     let qrCodeData: string;
     try {
@@ -416,6 +426,7 @@ const getRoomsByPropertyId2 = catchAsync(
     });
   }
 );
+
 
 
 export const getRoomsForBooking = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
