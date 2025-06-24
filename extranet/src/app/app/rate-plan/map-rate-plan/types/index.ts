@@ -20,6 +20,7 @@ export interface RatePlanInterFace {
     };
     currencyCode: string
     _id:string;
+    ratePlanCode:string
   }
 }
 export interface paginationTypes{
@@ -32,7 +33,5 @@ export interface paginationTypes{
 }
 export interface modifiedRatePlanInterface{
   rateAmountId:string;
-  inventoryId:string;
   price:number;
-  availability:number;
 }

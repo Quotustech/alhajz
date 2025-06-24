@@ -3,7 +3,9 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "@/Redux/store";
 import { setGuestDetails } from "@/Redux/slices/hotelcard.slice";
 import { createPortal } from "react-dom";
-import { Users } from "lucide-react";
+import { ChevronDown, Users } from "lucide-react";
+import dayjs from "dayjs";
+import { useTranslation } from "react-i18next";
 
 // Define props interface
 interface GuestBoxProps {
@@ -12,6 +14,10 @@ interface GuestBoxProps {
     guests: number;
     children: number;
     childAges: number[];
+    infants: number;
+    infantAges: number[];
+    childDOBs: string[];
+    infantDOBs: string[];
   }) => void;
 }
 
@@ -23,25 +29,37 @@ const GuestBox: React.FC<GuestBoxProps> = ({ onChange }) => {
   const [guests, setGuests] = useState(guestDetails?.guests || 1);
   const [children, setChildren] = useState(guestDetails?.children || 0);
   const [childAges, setChildAges] = useState(guestDetails?.childAges || Array.from({ length: 0 }, () => 0));
+  const [infants, setInfants] = useState(guestDetails?.infants || 0);
+  const [infantAges, setInfantAges] = useState(guestDetails?.infantAges || Array.from({ length: 0 }, () => 0));
   const [displayText, setDisplayText] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const { t, i18n } = useTranslation();
 
-  // Update display text when component mounts or guestDetails changes
-  useEffect(() => {
-    updateDisplayText();
-  }, [guestDetails]);
-
-  // Function to update display text in OTA style
+  // Function to update display text in OTA style with translations
   const updateDisplayText = () => {
     const roomsToUse = guestDetails?.rooms || rooms || 1;
     const guestsToUse = guestDetails?.guests || guests || 1;
     const childrenToUse = guestDetails?.children || children || 0;
+    const infantsToUse = guestDetails?.infants || infants || 0;
 
-    setDisplayText(
-      `${roomsToUse} ${roomsToUse === 1 ? "Room" : "Rooms"} · ${guestsToUse} ${guestsToUse === 1 ? "Adult" : "Adults"
-      }${childrenToUse > 0 ? ` · ${childrenToUse} ${childrenToUse === 1 ? "Child" : "Children"}` : ""}`
-    );
+    // Build the display text using translation keys
+    let text = `${roomsToUse} ${roomsToUse === 1 ? t("GuestBox.roomSingular") : t("GuestBox.roomsPlural")} · ${guestsToUse} ${guestsToUse === 1 ? t("GuestBox.adultSingular") : t("GuestBox.adultsPlural")}`;
+
+    if (childrenToUse > 0) {
+      text += ` · ${childrenToUse} ${childrenToUse === 1 ? t("GuestBox.childSingular") : t("GuestBox.childrenPlural")}`;
+    }
+
+    if (infantsToUse > 0) {
+      text += ` · ${infantsToUse} ${infantsToUse === 1 ? t("GuestBox.infantSingular") : t("GuestBox.infantsPlural")}`;
+    }
+
+    setDisplayText(text);
   };
+
+  // Update display text when component mounts or guestDetails changes
+  useEffect(() => {
+    updateDisplayText();
+  }, [guestDetails, t]); // Add 't' as dependency to re-render when language changes
 
   // Sync state with Redux when guestDetails changes
   useEffect(() => {
@@ -50,9 +68,16 @@ const GuestBox: React.FC<GuestBoxProps> = ({ onChange }) => {
       setGuests(guestDetails.guests || 1);
       setChildren(guestDetails.children || 0);
       setChildAges(guestDetails.childAges || []);
+      setInfants(guestDetails.infants || 0);
+      setInfantAges(guestDetails.infantAges || []);
       updateDisplayText();
     }
-  }, [guestDetails]);
+  }, [guestDetails, t]); // Add 't' as dependency
+
+  // Update display text when local state changes
+  useEffect(() => {
+    updateDisplayText();
+  }, [rooms, guests, children, infants, t]); // Add 't' as dependency
 
   useEffect(() => {
     if (modalOpen) {
@@ -64,13 +89,16 @@ const GuestBox: React.FC<GuestBoxProps> = ({ onChange }) => {
       document.body.style.overflow = "unset";
     };
   }, [modalOpen]);
+
   const openModal = () => {
     setModalOpen(true);
   };
+
   const closeModal = () => {
     setModalOpen(false);
     setError(null);
   };
+
   const incDecHandler = (
     setter: React.Dispatch<React.SetStateAction<number>>,
     delta: number,
@@ -78,34 +106,71 @@ const GuestBox: React.FC<GuestBoxProps> = ({ onChange }) => {
   ) => {
     setter((prevValue) => Math.max(prevValue + delta, minValue));
   };
+
   const handleChildrenChange = (value: number) => {
     setChildren(() => {
       const newValue = Math.max(value, 0);
-      setChildAges(Array.from({ length: newValue }, () => 0));
+      setChildAges((prevAges: number[]) => {
+        if (newValue > prevAges.length) {
+          // Adding children - preserve existing ages and add 0 for new ones
+          return [...prevAges, ...Array.from({ length: newValue - prevAges.length }, () => 0)];
+        } else {
+          // Removing children - keep only the first 'newValue' ages
+          return prevAges.slice(0, newValue);
+        }
+      });
       return newValue;
     });
   };
+
   const handleChildAgeChange = (index: number, age: number) => {
     const newChildAges = [...childAges];
     newChildAges[index] = age;
     setChildAges(newChildAges);
   };
+
+  const handleInfantsChange = (value: number) => {
+    setInfants(() => {
+      const newValue = Math.max(value, 0);
+      setInfantAges((prevAges: number[]) => {
+        if (newValue > prevAges.length) {
+          // Adding infants - preserve existing ages and add undefined for new ones
+          return [...prevAges, ...Array.from({ length: newValue - prevAges.length }, () => undefined)];
+        } else {
+          // Removing infants - keep only the first 'newValue' ages
+          return prevAges.slice(0, newValue);
+        }
+      });
+      return newValue;
+    });
+  };
+
+  const handleInfantAgeChange = (index: number, age: number) => {
+    const newInfantAges = [...infantAges];
+    newInfantAges[index] = age;
+    setInfantAges(newInfantAges);
+  };
+
   const isChildAgeValid = () => {
     return childAges.every((age: number) => age > 0 && age < 14);
+  };
+
+  const isInfantAgeValid = () => {
+    return infantAges.every((age: number) => age !== undefined && age >= 0 && age < 2);
   };
 
   const validateGuestCount = () => {
     // Typical max guests per room - 4 is standard for most hotels
     const maxGuestsPerRoom = 4;
 
-    // Total guests including children
-    const totalGuests = guests + children;
+    // Total guests including children and infants
+    const totalGuests = guests + children + infants;
 
     // Maximum allowed guests based on room count
     const maxAllowedGuests = rooms * maxGuestsPerRoom;
 
     if (totalGuests > maxAllowedGuests) {
-      setError(`Maximum ${maxGuestsPerRoom} guests allowed per room. Please add more rooms or reduce guests.`);
+      setError(t("GuestBox.maxGuestsError", { maxGuests: maxGuestsPerRoom }));
       return false;
     }
 
@@ -117,20 +182,18 @@ const GuestBox: React.FC<GuestBoxProps> = ({ onChange }) => {
       return;
     }
 
-    if (children === 0 || isChildAgeValid()) {
-      // Create guest data object
+    if ((children === 0 || isChildAgeValid()) && (infants === 0 || isInfantAgeValid())) {
+      // Create guest data object with calculated DOBs
       const guestData = {
         rooms,
         guests,
         children,
         childAges,
+        infants,
+        infantAges,
+        childDOBs: childAges.map((age: number) => dayjs().subtract(age, 'year').format('YYYY-MM-DD')),
+        infantDOBs: infantAges.map((age: number) => dayjs().subtract(age, 'year').format('YYYY-MM-DD'))
       };
-
-      // Update display text in OTA style
-      setDisplayText(
-        `${rooms} ${rooms === 1 ? "Room" : "Rooms"} · ${guests} ${guests === 1 ? "Adult" : "Adults"
-        }${children > 0 ? ` · ${children} ${children === 1 ? "Child" : "Children"}` : ""}`
-      );
 
       // Dispatch to Redux
       dispatch(setGuestDetails(guestData));
@@ -142,7 +205,7 @@ const GuestBox: React.FC<GuestBoxProps> = ({ onChange }) => {
 
       closeModal();
     } else {
-      setError("Please select the child's age");
+      setError(t("GuestBox.selectAgeError"));
     }
   };
 
@@ -158,12 +221,12 @@ const GuestBox: React.FC<GuestBoxProps> = ({ onChange }) => {
         <div className="w-full max-w-md bg-tripswift-off-white rounded-xl shadow-xl p-6 overflow-y-auto max-h-[80vh] animate-fadeIn">
           <div className="space-y-6">
             <h3 className="text-lg font-tripswift-extrabold text-tripswift-black pb-2 border-b border-tripswift-black/10">
-              Select guests
+              {t("GuestBox.selectGuests")}
             </h3>
             {/* Rooms Section */}
             <div className="flex items-center justify-between">
               <label className="text-tripswift-black font-tripswift-medium uppercase">
-                Rooms
+                {t("GuestBox.roomsPlural")}
               </label>
               <div className="flex items-center gap-3">
                 <button
@@ -185,9 +248,9 @@ const GuestBox: React.FC<GuestBoxProps> = ({ onChange }) => {
               </div>
             </div>
             {/* Guests Section */}
-            <div className="flex items-center justify-between">
+            <div className="flex items-center  justify-between">
               <label className="text-tripswift-black font-tripswift-medium uppercase">
-                Adults
+                {t("GuestBox.adultsPlural")}
               </label>
               <div className="flex items-center gap-3">
                 <button
@@ -215,9 +278,9 @@ const GuestBox: React.FC<GuestBoxProps> = ({ onChange }) => {
                   className="text-tripswift-black font-tripswift-medium uppercase"
                   htmlFor="modalChildren"
                 >
-                  Children{" "}
+                  {t("GuestBox.childrenPlural")}{" "}
                   <span className="text-xs text-tripswift-black/60">
-                    (ages 0-13)
+                    ({t("GuestBox.ages")} 2-12)
                   </span>
                 </label>
                 <div className="flex items-center gap-3">
@@ -239,39 +302,94 @@ const GuestBox: React.FC<GuestBoxProps> = ({ onChange }) => {
                   </button>
                 </div>
               </div>
-              {/* Child Age Selectors */}
+              {/* Custom Child Age Selectors */}
               {children > 0 && (
                 <div className="space-y-3 mt-4 pl-4">
                   {Array.from({ length: children }).map((_, index) => (
-                    <div
-                      key={index}
-                      className="flex items-center justify-between"
-                    >
-                      <label
-                        className="text-tripswift-black/70 text-sm font-tripswift-medium"
-                        htmlFor={`childAge${index + 1}`}
-                      >
-                        Child {index + 1} age
+                    <div key={index} className="flex items-center justify-between">
+                      <label className="text-tripswift-black/70 text-sm font-tripswift-medium">
+                        {t("GuestBox.childSingular")} {index + 1} {t("GuestBox.age")}
                       </label>
-                      <select
-                        id={`childAge${index + 1}`}
-                        value={childAges[index]}
-                        onChange={(e) =>
-                          handleChildAgeChange(index, parseInt(e.target.value))
-                        }
-                        className="w-24 p-2 border border-tripswift-black/20 rounded-lg bg-tripswift-off-white focus:ring-2 focus:ring-tripswift-blue/30 focus:border-tripswift-blue outline-none text-sm text-tripswift-black font-tripswift-medium"
-                      >
-                        <option value={0} disabled>
-                          Select age
-                        </option>
-                        {Array.from({ length: 14 }, (_, i) => i)
-                          .slice(1)
-                          .map((age) => (
+                      <div className="relative w-30">
+                        <select
+                          value={childAges[index]}
+                          onChange={(e) => handleChildAgeChange(index, parseInt(e.target.value))}
+                          className="appearance-none w-full p-2 pr-8 border border-tripswift-black/20 rounded-lg bg-tripswift-off-white focus:ring-2 focus:ring-tripswift-blue/30 focus:border-tripswift-blue outline-none text-sm text-tripswift-black font-tripswift-medium cursor-pointer"
+                        >
+                          <option value={0} disabled>{t("GuestBox.selectAge")}</option>
+                          {Array.from({ length: 13 }, (_, i) => i)
+                            .slice(2)
+                            .map((age) => (
+                              <option key={age} value={age}>
+                                {age} {age === 1 ? t("GuestBox.yearSingular") : t("GuestBox.yearPlural")}
+                              </option>
+                            ))}
+                        </select>
+                        <div className="absolute inset-y-0 right-2 flex items-center pointer-events-none">
+                          <ChevronDown className="h-4 w-4 text-tripswift-black/40" />
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+            {/* Infants Section */}
+            <div className="space-y-3 pt-2 border-t border-tripswift-black/10">
+              <div className="flex items-center justify-between">
+                <label
+                  className="text-tripswift-black font-tripswift-medium uppercase"
+                  htmlFor="modalInfants"
+                >
+                  {t("GuestBox.infantsPlural")}{" "}
+                  <span className="text-xs text-tripswift-black/60">
+                    ({t("GuestBox.ages")} 0-1)
+                  </span>
+                </label>
+                <div className="flex items-center gap-3">
+                  <button
+                    className="w-9 h-9 rounded-full border border-tripswift-black/20 text-tripswift-black/60 flex items-center justify-center transition-colors hover:bg-tripswift-blue/10 disabled:opacity-50"
+                    onClick={() => handleInfantsChange(infants - 1)}
+                    disabled={infants <= 0}
+                  >
+                    <span className="text-lg">-</span>
+                  </button>
+                  <span className="w-8 text-center text-tripswift-black font-tripswift-medium">
+                    {infants}
+                  </span>
+                  <button
+                    className="w-9 h-9 rounded-full border border-tripswift-black/20 text-tripswift-black/60 flex items-center justify-center transition-colors hover:bg-tripswift-blue/10"
+                    onClick={() => handleInfantsChange(infants + 1)}
+                  >
+                    <span className="text-lg">+</span>
+                  </button>
+                </div>
+              </div>
+              {/* Infant Age Selectors */}
+              {infants > 0 && (
+                <div className="space-y-3 mt-4 pl-4">
+                  {Array.from({ length: infants }).map((_, index) => (
+                    <div key={index} className="flex items-center justify-between">
+                      <label className="text-tripswift-black/70 text-sm font-tripswift-medium">
+                        {t("GuestBox.infantsPlural")} {index + 1} {t("GuestBox.age")}
+                      </label>
+                      <div className="relative w-30">
+                        <select
+                          value={infantAges[index] !== undefined ? infantAges[index] : ""}
+                          onChange={(e) => handleInfantAgeChange(index, parseInt(e.target.value))}
+                          className="appearance-none w-full p-2 pr-8 border border-tripswift-black/20 rounded-lg bg-tripswift-off-white focus:ring-2 focus:ring-tripswift-blue/30 focus:border-tripswift-blue outline-none text-sm text-tripswift-black font-tripswift-medium cursor-pointer"
+                        >
+                          <option value="" disabled>{t("GuestBox.selectAge")}</option>
+                          {[0, 1].map((age) => (
                             <option key={age} value={age}>
-                              {age} {age === 1 ? "year" : "years"}
+                              {age} {age === 1 ? t("GuestBox.yearSingular") : t("GuestBox.yearPlural")}
                             </option>
                           ))}
-                      </select>
+                        </select>
+                        <div className="absolute inset-y-0 right-2 flex items-center pointer-events-none">
+                          <ChevronDown className="h-4 w-4 text-tripswift-black/40" />
+                        </div>
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -289,13 +407,13 @@ const GuestBox: React.FC<GuestBoxProps> = ({ onChange }) => {
                 onClick={closeModal}
                 className="px-4 py-2 text-tripswift-black/60 hover:text-tripswift-black font-tripswift-medium transition-colors"
               >
-                Cancel
+                {t("GuestBox.cancel")}
               </button>
               <button
                 onClick={handleApplyChanges}
                 className="btn-tripswift-primary px-6 py-2.5"
               >
-                Apply
+                {t("GuestBox.apply")}
               </button>
             </div>
           </div>
@@ -312,23 +430,18 @@ const GuestBox: React.FC<GuestBoxProps> = ({ onChange }) => {
       >
         <div className="w-full sm:w-auto sm:flex-[0.7]">
           <div className="relative group">
-            <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
+            <div className={`absolute inset-y-0 ${i18n.language === "ar" ? "right-3" : "left-3"} flex items-center pointer-events-none`}>
               <div className="w-8 h-8 rounded-full flex items-center justify-center group-hover:bg-tripswift-blue/10 transition-colors duration-300">
                 <Users className="h-4 w-4 text-tripswift-black/40 group-hover:text-tripswift-blue transition-colors duration-200" />
               </div>
             </div>
-            <div className="bg-white border border-tripswift-black/10 hover:border-tripswift-blue/20 rounded-md shadow-sm transition-all duration-200 h-11 pl-12 flex items-center">
-              <span className="text-tripswift-black/70 text-sm font-tripswift-medium">
-                {displayText || "1 Room · 1 Adult · 0 Children"}
+            <div className={`bg-white border border-tripswift-black/10 hover:border-tripswift-blue/20 rounded-md shadow-sm transition-all duration-200 h-11 ${i18n.language === "ar" ? "pr-12" : "pl-12"} flex items-center`}>
+              <span className="text-tripswift-black/70 ml-3 mr-3 text-sm font-tripswift-medium">
+                {displayText || t("GuestBox.defaultText")}
               </span>
             </div>
           </div>
         </div>
-
-        {/* Indicator for custom selection */}
-        {/* {(rooms > 1 || guests > 1 || children > 0) && (
-          <div className="w-2 h-2 bg-tripswift-blue rounded-full mr-2"></div>
-        )} */}
       </div>
 
       {/* Render the modal using a portal */}
@@ -336,4 +449,5 @@ const GuestBox: React.FC<GuestBoxProps> = ({ onChange }) => {
     </div>
   );
 };
+
 export default GuestBox;

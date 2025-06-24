@@ -12,6 +12,14 @@ export class ThirdPartyAmendReservationRepository {
     xmlResponse: string
   ): Promise<any> {
     try {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const checkInDate = new Date(data.checkInDate);
+      checkInDate.setHours(0, 0, 0, 0); 
+
+      if (today >= checkInDate) {
+        throw new Error('Cannot update reservation.');
+      }
       console.log('Updating booking to cancelled status...');
 
       const updatedBooking = await ThirdPartyBooking.findOneAndUpdate(
@@ -21,9 +29,14 @@ export class ThirdPartyAmendReservationRepository {
             status: data.status,
             hotelCode: data.hotelCode,
             hotelName: data.hotelName,
+            numberOfRooms: data.numberOfRooms,
+            guestDetails: data.guests,
+            email: data.email,
+            phone: data.phone,
             checkInDate: data.checkInDate,
             checkOutDate: data.checkOutDate,
             ageCodeSummary: data.ageCodeSummary,
+            totalAmount: data.amountBeforeTax,
             xmlRequest,
             xmlResponse,
             updatedAt: new Date(),
@@ -42,11 +55,16 @@ export class ThirdPartyAmendReservationRepository {
         reservationId: updatedBooking.reservationId,
         hotelCode: updatedBooking.hotelCode,
         hotelName: updatedBooking.hotelName,
+        numberOfRooms: updatedBooking.numberOfRooms,
+        guestDetails: updatedBooking.guestDetails,
+        email: updatedBooking.email,
+        phone: updatedBooking.phone,
         ratePlanCode: updatedBooking.ratePlanCode,
         roomTypeCode: updatedBooking.roomTypeCode,
         checkInDate: updatedBooking.checkInDate,
         checkOutDate: updatedBooking.checkOutDate,
         ageCodeSummary: data.ageCodeSummary,
+        totalAmount: data.amountBeforeTax,
         jsonInput: JSON.stringify(data),
         xmlSent: xmlRequest,
         apiResponse: xmlResponse,

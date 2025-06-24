@@ -42,7 +42,6 @@ interface RoomWithRates {
     }>;
   }>;
 }
-
 class RatePlanDao {
   public static async create(ratePlanData: RatePlanType) {
     try {
@@ -54,36 +53,17 @@ class RatePlanDao {
       throw new Error("Failed to create rate plan");
     }
   }
-
   public static async updateRatePlan(ratePlansData:UpdatePlanData[]) {
-
    try {
     // Validate input
     if (!Array.isArray(ratePlansData) || ratePlansData.length === 0) {
       throw new Error("ratePlansData must be a non-empty array");
     }
-
     // Create update promises for each rate plan
     const updatePromises = ratePlansData.map(async (planData, index) => {
-      const { rateAmountId, inventoryId, price, availability } = planData;
-      
+      const { rateAmountId, price } = planData;
       let inventoryUpdated = null;
       let rateUpdated = null;
-
-      // Update inventory if availability is provided
-      if (availability !== undefined && inventoryId) {
-        inventoryUpdated = await Inventory.findByIdAndUpdate(
-          inventoryId,
-          { "availability.count": availability },
-          { new: true, runValidators: true }
-        );
-
-        if (!inventoryUpdated) {
-          throw new Error(`Inventory not found or update failed for inventoryId: ${inventoryId}`);
-        }
-      }
-
-      // Update rate amount if price is provided
       if (price !== undefined && rateAmountId) {
         console.log("rate amount",rateAmountId)
         rateUpdated = await RateAmount.findByIdAndUpdate(
@@ -95,33 +75,25 @@ class RatePlanDao {
           },
           { new: true, runValidators: true }
         );
-
         if (!rateUpdated) {
           throw new Error(`Rate Amount update failed for rateAmountId: ${rateAmountId}`);
         }
       }
-
-      // Validate that at least one update was requested
-      if (price === undefined && availability === undefined) {
+      if (price === undefined ) {
         throw new Error(`No update data provided for index ${index}`);
       }
-
       return {
         index,
         rateAmountId,
-        inventoryId,
         rateAmount: rateUpdated,
         inventory: inventoryUpdated,
         success: true
       };
     });
-
     // Wait for all updates to complete (parallel execution)
     const results = await Promise.allSettled(updatePromises);
-    
     const successResults = [];
     const errorResults = [];
-
     results.forEach((result, index) => {
       if (result.status === 'fulfilled') {
         successResults.push(result.value);
@@ -135,7 +107,6 @@ class RatePlanDao {
         });
       }
     });
-
     const response = {
       totalProcessed: ratePlansData.length,
       successCount: successResults.length,
@@ -144,23 +115,19 @@ class RatePlanDao {
       errors: errorResults,
       message: `Processed ${ratePlansData.length} rate plans: ${successResults.length} successful, ${errorResults.length} failed`
     };
-
     // If all updates failed, throw an error
     if (errorResults.length === ratePlansData.length) {
       throw new Error(`All rate plan updates failed: ${errorResults.map(e => e.error).join('; ')}`);
     }
-
     return response;
-
   } catch (error) {
     console.error("Error updating rate plans:", error);
     throw error;
     }
   }
-
 /**
- * Get available rooms with their corresponding rates using aggregation pipeline
- */
+* Get available rooms with their corresponding rates using aggregation pipeline
+*/
 public static async getRatePlanByHotel(
   hotelCode: string,
   invTypeCode?: string,
@@ -179,21 +146,16 @@ public static async getRatePlanByHotel(
   };
 }> {
   page = page ?? 1;
-  
   const resultsPerPage = 20;
   const skip = (page - 1) * resultsPerPage;
-
   // Build match stage for inventory based on given parameters
   const inventoryMatch: any = { hotelCode };
-
   if (invTypeCode) {
     inventoryMatch.invTypeCode = invTypeCode;
   }
-
   if (startDate && endDate) {
     const start = startOfDay(startDate);
     const end = endOfDay(endDate);
-
     inventoryMatch.$or = [
       { "availability.startDate": { $gte: start, $lte: end } },
       { "availability.endDate": { $gte: start, $lte: end } },
@@ -205,7 +167,6 @@ public static async getRatePlanByHotel(
       }
     ];
   }
-
   // UPDATED RATE LOOKUP PIPELINE
   // Simplified to match exact start dates
   const rateLookupPipeline: any[] = [
@@ -222,7 +183,6 @@ public static async getRatePlanByHotel(
       }
     }
   ];
-
   // Pipeline for counting total results
   const countPipeline = [
     { $match: inventoryMatch },
@@ -240,9 +200,7 @@ public static async getRatePlanByHotel(
     },
     { $count: "total" }
   ];
-
   // ... existing code ...
-
 // Pipeline for fetching paginated data
 const dataPipeline = [
   { $match: inventoryMatch },
@@ -277,8 +235,10 @@ const dataPipeline = [
               in: {
                 _id: "$$firstRate._id",
                 currencyCode: "$$firstRate.currencyCode",
+                                ratePlanCode:"$$firstRate.ratePlanCode",
+
                 // Preserve the baseByGuestAmts structure
-                baseByGuestAmts: { 
+                baseByGuestAmts: {
                   $cond: {
                     if: { $gt: [{ $size: "$$firstRate.baseByGuestAmts" }, 0] },
                     then: { $arrayElemAt: ["$$firstRate.baseByGuestAmts", 0] },
@@ -294,17 +254,13 @@ const dataPipeline = [
     }
   }
 ];
-
 // ... rest of the code remains the same ...
-
   const [countResult, dataResult] = await Promise.all([
     Inventory.aggregate(countPipeline),
     Inventory.aggregate(dataPipeline)
   ]);
-
   const totalResults = countResult[0]?.total || 0;
   const totalPages = Math.ceil(totalResults / resultsPerPage);
-
   return {
     data: dataResult,
     pagination: {
@@ -317,22 +273,18 @@ const dataPipeline = [
     }
   };
 }
-
   public static async getAllRoomType() {
     try {
       const response = await Inventory.distinct("invTypeCode");
-
       return response;
     } catch (error) {
       throw new Error(error.message)
     }
 }
-
 public static async getRatePlanByHotelCode(hotelCode: string) {
     return await RatePlan.find(
       { propertyId: hotelCode }
     );
   }
 }
-
 export { RatePlanDao };

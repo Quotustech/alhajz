@@ -17,7 +17,7 @@ import EmptyState from "./EmptyState";
 import BookingCard from "./BookingCard";
 import BookingPagination from "./BookingPagination";
 import BookingDetailsModal from "./BookingDetailsModal";
-import { useTranslation } from "react-i18next"; // Import useTranslation
+import { useTranslation } from "react-i18next";
 import { useRouter } from "next/navigation";
 
 
@@ -54,8 +54,8 @@ export default function BookingTabs() {
 
   const authUser = useSelector((state: RootState) => state.auth.user);
   const token = Cookies.get("accessToken");
-  const router =useRouter();
-   
+  const router = useRouter();
+
   //it helps us to 
   useEffect(() => {
     const handlePopState = () => {
@@ -72,13 +72,13 @@ export default function BookingTabs() {
   useEffect(() => {
     const fetchBookings = async () => {
       if (!authUser?._id) {
-        // Using translation for error message
         setError(t("BookingTabs.userNotLoggedIn"));
         setLoading(false);
         return;
       }
 
       try {
+        console.log('Fetching bookings with filterData:', activeTab === 'all' ? '' : activeTab);
         const response = await axios.get<PaginationResponse>(
           `${process.env.NEXT_PUBLIC_BACKEND_URL}/booking/customers/booking/details/${authUser?._id}`,
           {
@@ -87,46 +87,59 @@ export default function BookingTabs() {
             },
             params: {
               page: currentPage,
-              limit: itemsPerPage
-            }
+              limit: itemsPerPage,
+              filterData: activeTab === 'all' ? '' : activeTab,
+            },
           }
         );
-
-        setBookings(response.data.bookingDetails);
-        console.log("booking details we get from backend ",response.data.bookingDetails)
+        setBookings(response.data.bookings || []);
         setTotalBookings(response.data.totalBookings);
         setTotalPages(response.data.totalPages);
         setLoading(false);
       } catch (err) {
-        // Using translation for error message
         setError(t("BookingTabs.noBooking"));
         setLoading(false);
       }
     };
 
     fetchBookings();
-  }, [authUser, token, currentPage, itemsPerPage, t]); // Add t to dependency array
+  }, [authUser, token, currentPage, itemsPerPage, activeTab, t]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [activeTab]);
+
+  useEffect(() => {
+    setFilteredBookings(bookings);
+  }, [bookings]);
 
   // Filter bookings based on active tab
-  useEffect(() => {
-    const today = new Date();
+  // useEffect(() => {
+  //   const today = new Date();
+  //   if (!bookings) {
+  //     setFilteredBookings([]);
+  //     return;
+  //   }
+  //   if (activeTab === 'all') {
+  //     setFilteredBookings(bookings);
+  //   } else if (activeTab === 'upcoming') {
+  //     setFilteredBookings(bookings.filter(booking => {
+  //       const checkoutDate = parseISO(booking.checkOutDate);
+  //       return checkoutDate >= today && booking.status !== 'Cancelled';
+  //     }));
+  //   } else if (activeTab === 'completed') {
+  //     setFilteredBookings(bookings.filter(booking => {
+  //       const checkoutDate = parseISO(booking.checkOutDate);
+  //       return checkoutDate < today && booking.status !== 'Cancelled';
+  //     }));
+  //   } else if (activeTab === 'cancelled') {
+  //     setFilteredBookings(bookings.filter(booking => booking.status === 'Cancelled'));
+  //   }
+  // }, [activeTab, bookings]);
 
-    if (activeTab === 'all') {
-      setFilteredBookings(bookings);
-    } else if (activeTab === 'upcoming') {
-      setFilteredBookings(bookings.filter(booking => {
-        const checkoutDate = parseISO(booking.checkOutDate);
-        return checkoutDate >= today && booking.status !== 'Cancelled';
-      }));
-    } else if (activeTab === 'completed') {
-      setFilteredBookings(bookings.filter(booking => {
-        const checkoutDate = parseISO(booking.checkOutDate);
-        return checkoutDate < today && booking.status !== 'Cancelled';
-      }));
-    } else if (activeTab === 'cancelled') {
-      setFilteredBookings(bookings.filter(booking => booking.status === 'Cancelled'));
-    }
-  }, [activeTab, bookings]);
+  useEffect(() => {
+    setFilteredBookings(bookings);
+  }, [bookings]);
 
   // Function to handle cancellation completion
   const handleCancellationComplete = (bookingId: string) => {
@@ -152,19 +165,15 @@ export default function BookingTabs() {
       booking._id === bookingId
         ? {
           ...booking,
-          checkInDate: amendedData.timeSpan.start,
-          checkOutDate: amendedData.timeSpan.end,
-          adultCount: amendedData.guestCounts.adultCount,
-          childCount: amendedData.guestCounts.childCount,
-          room: {
-            ...booking.room,
-            room_type: amendedData.roomType.roomTypeName,
-            room_type_code: amendedData.roomType.roomTypeCode
-          },
-          specialRequests: amendedData.comments,
-          ratePlanCode: amendedData.ratePlan.ratePlanCode,
-          ratePlanName: amendedData.ratePlan.ratePlanName,
-          amount: amendedData.rateInfo.totalBeforeTax
+          checkInDate: amendedData.checkInDate,
+          checkOutDate: amendedData.checkOutDate,
+          ratePlanCode: amendedData.ratePlanCode,
+          roomTypeCode: amendedData.roomTypeCode,
+          numberOfRooms: amendedData.numberOfRooms,
+          totalAmount: amendedData.roomTotalPrice,
+          currencyCode: amendedData.currencyCode,
+          guestDetails: amendedData.guests,
+          status: 'Modified',
         }
         : booking
     ));
@@ -172,13 +181,15 @@ export default function BookingTabs() {
     if (selectedBooking && selectedBooking._id === bookingId) {
       setSelectedBooking({
         ...selectedBooking,
-        checkInDate: amendedData.timeSpan.start,
-        checkOutDate: amendedData.timeSpan.end,
-        room: {
-          ...selectedBooking.room,
-          room_type: amendedData.roomType.roomTypeName,
-          room_type_code: amendedData.roomType.roomTypeCode
-        }
+        checkInDate: amendedData.checkInDate,
+        checkOutDate: amendedData.checkOutDate,
+        ratePlanCode: amendedData.ratePlanCode,
+        roomTypeCode: amendedData.roomTypeCode,
+        numberOfRooms: amendedData.numberOfRooms,
+        totalAmount: amendedData.roomTotalPrice,
+        currencyCode: amendedData.currencyCode,
+        guestDetails: amendedData.guests,
+        status: 'Modified',
       });
     }
 
@@ -228,23 +239,24 @@ export default function BookingTabs() {
       {/* Header Section */}
       <BookingHeader />
 
-      <div className="container mx-auto px-4 py-8 md:py-12 -mt-6">
+      <div className="container w-full mx-auto px-4 py-8 md:py-12 -mt-6">
         {/* Tabs Navigation */}
-        <BookingTabsNavigation activeTab={activeTab} setActiveTab={setActiveTab} />
+        <BookingTabsNavigation activeTab={activeTab} setActiveTab={ setActiveTab} />
 
         {loading ? (
           <LoadingState />
         ) : error ? (
           <ErrorState errorMessage={error} />
-        ) : filteredBookings.length === 0 ? (
+        ) : !filteredBookings || filteredBookings.length === 0 ? (
           <EmptyState activeTab={activeTab} />
         ) : (
           <>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1  lg:grid-cols-2 gap-6">
               {filteredBookings.map((booking) => (
                 <BookingCard
                   key={booking._id}
                   booking={booking}
+                  activeTab={activeTab}
                   onViewDetails={handleViewDetails}
                   onModify={handleModifyBooking}
                   onCancel={handleCancelBooking}
@@ -268,7 +280,7 @@ export default function BookingTabs() {
       {/* Modals */}
       {showModal && selectedBooking && (
         <div className="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex items-center justify-center z-50 p-4 overflow-y-auto">
-          <div className="bg-tripswift-off-white rounded-xl shadow-xl w-full max-w-3xl max-h-[90vh] overflow-y-auto relative">
+          <div className="bg-tripswift-off-white rounded-xl shadow-xl w-full max-w-2xl max-h-[95vh] overflow-y-auto relative">
             {showCancellationUI ? (
               <CancellationModal
                 booking={selectedBooking}

@@ -11,6 +11,9 @@ export class ThirdPartyReservationRepository {
 
     const booking = new ThirdPartyBooking({
       userId: data.userId,
+      guestDetails: data.guests,
+      email: data.email,
+      phone: data.phone,
       reservationId: data.reservationId,
       hotelCode: data.hotelCode,
       hotelName: data.hotelName,
@@ -22,6 +25,7 @@ export class ThirdPartyReservationRepository {
       ageCodeSummary: data.ageCodeSummary,
       totalAmount: data.amountBeforeTax,
       currencyCode: data.currencyCode,
+      status: 'Confirmed',
     });
 
     const savedBooking = await booking.save();
@@ -51,13 +55,16 @@ export class ThirdPartyReservationRepository {
       hotelName: jsonInput.hotelName,
       ratePlanCode: jsonInput.ratePlanCode,
       roomTypeCode: jsonInput.roomTypeCode,
+      guestDetails: jsonInput.guests,
+      email: jsonInput.email,
+      phone: jsonInput.phone,
       checkInDate: new Date(jsonInput.checkInDate),
       checkOutDate: new Date(jsonInput.checkOutDate),
       jsonInput: JSON.stringify(jsonInput, null, 2),
+      status: 'Confirmed',
       xmlSent,
       apiResponse,
       process: 'Reservation',
-      status: success ? 'Success' : 'Failure',
       errorMessage: success ? null : apiResponse,
       timestamp: new Date(),
     });
