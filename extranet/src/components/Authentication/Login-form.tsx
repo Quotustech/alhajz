@@ -18,6 +18,8 @@ import { getProperties } from "../../redux/slices/propertySlice";
 import { CardTitle } from "../ui/card";
 import { ReloadIcon } from "@radix-ui/react-icons";
 
+type Props = {};
+
 const loginSchema = z.object({
   email: z
     .string()
@@ -164,7 +166,7 @@ const LoginForm: React.FC = () => {
             type="submit"
             size="lg"
             className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-medium"
-            isDisabled={!isValid || loading}
+            isDisabled={ loading}
           >
             {loading && <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />}
             Sign In
@@ -180,18 +182,41 @@ const LoginForm: React.FC = () => {
               </span>
             </div>
           </div>
-
-          <Button
-            type="button"
-            variant="outline"
-            className="w-full"
-            onClick={() => router.push("/register")}
-          >
-            Create Account
-          </Button>
+        </div>
+        <div className="flex flex-col items-center">
+          <span>
+            Don't have an account?{" "}
+            <Button
+              type="button"
+              className="px-0"
+              onClick={() => router.push("/register")}
+              variant={"link"}
+            >
+              Register
+            </Button>
+          </span>
+          <SubmitButton loading={loading} />
         </div>
       </form>
     </div>
+  );
+};
+
+interface SubmitButtonProps {
+  loading: boolean;
+}
+
+const SubmitButton: React.FC<SubmitButtonProps> = ({ loading }) => {
+  return (
+    <NextUIButton
+      size="lg"
+      type="submit"
+      variant="solid"
+      className="bg-primary text-primary-foreground hover:bg-primary/90 w-full"
+      isLoading={loading}
+    >
+      Login
+    </NextUIButton>
   );
 };
 
