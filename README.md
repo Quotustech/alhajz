@@ -140,3 +140,4 @@ npm start
     Developed a room selection system that allows users to compare room categories, occupancy limits, and pricing.
     Integrated multiple pricing components, including base room rates, extra guest charges, taxes, and additional services.
     Implemented a promotional discount system to apply eligible offers and coupon codes during the booking process.
+    Developed an add-on services module to allow customers to select additional facilities while making reservations.
