@@ -133,3 +133,4 @@ npm start
     Version Control	    Git, GitHub
 
 #Booking Engine – Customer Experience
+    Developed an interactive hotel booking interface that allows users to search and explore properties based on their travel preferences.
