@@ -126,4 +126,4 @@ npm start
     Backend            	Node.js, Express.js
     Database	        MongoDB, PostgreSQL
     ORM	                Prisma
-    
+    Caching	            Redis
