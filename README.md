@@ -103,3 +103,4 @@ npm start
     Database operations using MongoDB.
     Integration with third-party hotel and travel APIs.
     Booking lifecycle and reservation management.
+    Dynamic pricing and availability calculation.
