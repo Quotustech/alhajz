@@ -172,3 +172,4 @@ npm start
     Developed secure authentication and authorization mechanisms using JWT.
     Implemented password encryption and verification using bcrypt.
     Created reusable middleware for authentication, authorization, validation, and error handling.
+    Developed CRUD operations for managing properties, rooms, users, reservations, and hotel configurations.
