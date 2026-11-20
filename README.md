@@ -75,5 +75,6 @@ npm start
     Advanced hotel search with location, check-in, check-out, guest, and room filters.
     Real-time hotel availability and pricing based on selected dates.
     Dynamic room pricing based on occupancy and booking conditions.
+    Room selection with detailed descriptions, images, amenities, and facilities.
 
 2. Extranet (Hotel Partner Dashboard)
