@@ -143,3 +143,4 @@ npm start
     Developed an add-on services module to allow customers to select additional facilities while making reservations.
     Implemented a wishlist feature that allows authenticated users to save and manage their favorite properties.
     Created user profile management functionality for updating personal information and managing account details.
+    Integrated booking history functionality to help users track their previous and upcoming reservations.
