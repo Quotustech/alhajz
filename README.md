@@ -159,3 +159,4 @@ Extranet – Hotel Management System
     Implemented booking management functionality for viewing and processing customer reservations.
     Developed reservation status management to track booking confirmations, modifications, and cancellations.
     Integrated hotel amenity management to maintain property-level and room-level facilities.
+    Implemented configurable booking restrictions, including minimum length of stay and maximum length of stay.
