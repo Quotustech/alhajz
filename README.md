@@ -89,3 +89,4 @@ npm start
     Update room rates and availability through a calendar-based interface.
     Manage inventory and room allocation.
     Configure hotel policies, cancellation rules, and booking restrictions.
+    Manage seasonal pricing and special promotional rates.
