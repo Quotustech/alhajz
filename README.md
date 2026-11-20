@@ -186,3 +186,4 @@ npm start
 🔥 Advanced Business Logic
     Implemented dynamic pricing calculations based on check-in dates, checkout dates, room occupancy, and applicable pricing policies.
     Developed minimum-length-of-stay and maximum-length-of-stay validation for hotel booking restrictions.
+    Implemented promotional pricing logic based on booking dates, travel dates, and customer eligibility.
