@@ -191,3 +191,4 @@ npm start
     Implemented tourist tax and additional charge calculations within the booking price breakdown.
     Created booking validation mechanisms to verify room availability before proceeding with reservations.
     Implemented cancellation and modification workflows based on configured property policies.
+    Developed inventory synchronization mechanisms to maintain consistency between hotel availability and booking information.
