@@ -138,3 +138,4 @@ npm start
     Integrated dynamic hotel listing pages to display property details, room categories, available amenities, and pricing information.
     Implemented real-time availability checking to retrieve available rooms based on selected travel dates.
     Developed a room selection system that allows users to compare room categories, occupancy limits, and pricing.
+    Integrated multiple pricing components, including base room rates, extra guest charges, taxes, and additional services.
