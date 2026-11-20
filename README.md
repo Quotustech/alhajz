@@ -97,3 +97,4 @@ npm start
 3. Backend API
     Modular REST API architecture using Node.js and Express.js.
     Secure authentication and authorization using JWT.
+    Password hashing and validation using bcrypt.
