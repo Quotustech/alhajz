@@ -155,3 +155,4 @@ Extranet – Hotel Management System
     Created modules for managing hotel information, room categories, facilities, and property descriptions.
     Developed room inventory management functionality to maintain room availability and allocation.
     Implemented calendar-based rate management for updating room prices across different dates.
+    Created pricing configuration modules to manage seasonal rates, promotional prices, and occupancy-based pricing.
