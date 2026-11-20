@@ -150,4 +150,4 @@ npm start
     Implemented form validation and error handling to improve data accuracy during the booking process.
 
 Extranet – Hotel Management System
-
+    Developed a centralized hotel administration dashboard for managing property-related operations.
