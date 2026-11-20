@@ -112,3 +112,4 @@ npm start
     Dynamic Pricing: Automatically calculate room prices based on occupancy, dates, and applicable pricing rules.
     Inventory Management: Maintain room availability and prevent overbooking.
     Promotional Management: Support different promotional campaigns, discount rules, and coupon codes.
+    Multi-Property Management: Allow hotel partners to manage multiple properties from a single dashboard.
