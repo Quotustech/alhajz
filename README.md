@@ -129,3 +129,4 @@ npm start
     Caching	            Redis
     Authentication	    JWT, bcrypt
     Real-time Communication	Socket.IO
+    API Testing	        Postman
