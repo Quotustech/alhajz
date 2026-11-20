@@ -134,3 +134,4 @@ npm start
 
 #Booking Engine – Customer Experience
     Developed an interactive hotel booking interface that allows users to search and explore properties based on their travel preferences.
+    Implemented advanced search functionality with location, check-in, check-out, room, adult, and child selection.
