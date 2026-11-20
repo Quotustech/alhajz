@@ -77,5 +77,6 @@ npm start
     Dynamic room pricing based on occupancy and booking conditions.
     Room selection with detailed descriptions, images, amenities, and facilities.
     Add-on services and extra facilities during the booking process.
+    Promotional offers, discount coupons, and special deals.
 
 2. Extranet (Hotel Partner Dashboard)
