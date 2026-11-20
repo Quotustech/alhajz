@@ -100,3 +100,4 @@ npm start
     Password hashing and validation using bcrypt.
     Role-based access control for customers, hotel partners, and administrators.
     Centralized error handling and request validation.
+    Database operations using MongoDB.
