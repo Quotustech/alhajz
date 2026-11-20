@@ -139,3 +139,4 @@ npm start
     Implemented real-time availability checking to retrieve available rooms based on selected travel dates.
     Developed a room selection system that allows users to compare room categories, occupancy limits, and pricing.
     Integrated multiple pricing components, including base room rates, extra guest charges, taxes, and additional services.
+    Implemented a promotional discount system to apply eligible offers and coupon codes during the booking process.
