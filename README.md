@@ -189,3 +189,4 @@ npm start
     Implemented promotional pricing logic based on booking dates, travel dates, and customer eligibility.
     Developed extra guest pricing calculations based on room occupancy configurations.
     Implemented tourist tax and additional charge calculations within the booking price breakdown.
+    Created booking validation mechanisms to verify room availability before proceeding with reservations.
