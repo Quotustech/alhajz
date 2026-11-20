@@ -188,3 +188,4 @@ npm start
     Developed minimum-length-of-stay and maximum-length-of-stay validation for hotel booking restrictions.
     Implemented promotional pricing logic based on booking dates, travel dates, and customer eligibility.
     Developed extra guest pricing calculations based on room occupancy configurations.
+    Implemented tourist tax and additional charge calculations within the booking price breakdown.
