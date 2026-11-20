@@ -178,3 +178,4 @@ npm start
     Implemented centralized response handling to maintain consistent API response structures.
     Developed request validation to prevent invalid or incomplete data from entering the application.
     Implemented error logging and debugging mechanisms to identify and resolve backend issues.
+    Optimized database queries to improve API response times and application performance.
