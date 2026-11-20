@@ -79,5 +79,6 @@ npm start
     Add-on services and extra facilities during the booking process.
     Promotional offers, discount coupons, and special deals.
     Booking price calculation, including taxes, additional charges, and discounts.
+    Booking history and reservation management.
 
 2. Extranet (Hotel Partner Dashboard)
