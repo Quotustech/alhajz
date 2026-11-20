@@ -91,3 +91,4 @@ npm start
     Configure hotel policies, cancellation rules, and booking restrictions.
     Manage seasonal pricing and special promotional rates.
     View, confirm, modify, and cancel guest reservations.
+    Monitor booking statistics and property performance.
