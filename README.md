@@ -181,3 +181,4 @@ npm start
     Optimized database queries to improve API response times and application performance.
     Implemented pagination and filtering mechanisms for handling large datasets efficiently.
     Developed booking-related business logic to manage reservation creation, confirmation, and cancellation.
+    Integrated third-party services to extend the platform's booking and payment capabilities.
