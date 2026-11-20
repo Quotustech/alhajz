@@ -68,3 +68,9 @@ cd ../booking-engine
 setup .env file
 npm install
 npm start
+
+
+# Additional Key Features
+1. Booking Engine
+
+2. Extranet (Hotel Partner Dashboard)
