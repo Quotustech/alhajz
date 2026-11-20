@@ -173,3 +173,4 @@ npm start
     Implemented password encryption and verification using bcrypt.
     Created reusable middleware for authentication, authorization, validation, and error handling.
     Developed CRUD operations for managing properties, rooms, users, reservations, and hotel configurations.
+    Implemented database queries and aggregation operations to retrieve and process hotel-related information.
