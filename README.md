@@ -98,3 +98,4 @@ npm start
     Modular REST API architecture using Node.js and Express.js.
     Secure authentication and authorization using JWT.
     Password hashing and validation using bcrypt.
+    Role-based access control for customers, hotel partners, and administrators.
