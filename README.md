@@ -124,5 +124,5 @@ npm start
     Frontend            React.js, Next.js, TypeScript
     State Management    Redux Toolkit
     Backend            	Node.js, Express.js
-    
+    Database	        MongoDB, PostgreSQL
     
