@@ -109,4 +109,4 @@ npm start
 #Advanced Functionalities
 
 🔥 Advanced Platform Capabilities
-
+    Dynamic Pricing: Automatically calculate room prices based on occupancy, dates, and applicable pricing rules.
