@@ -192,3 +192,4 @@ npm start
     Created booking validation mechanisms to verify room availability before proceeding with reservations.
     Implemented cancellation and modification workflows based on configured property policies.
     Developed inventory synchronization mechanisms to maintain consistency between hotel availability and booking information.
+    Integrated multiple pricing rules to calculate the final payable amount accurately.
