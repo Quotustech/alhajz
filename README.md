@@ -128,3 +128,4 @@ npm start
     ORM	                Prisma
     Caching	            Redis
     Authentication	    JWT, bcrypt
+    Real-time Communication	Socket.IO
