@@ -113,3 +113,4 @@ npm start
     Inventory Management: Maintain room availability and prevent overbooking.
     Promotional Management: Support different promotional campaigns, discount rules, and coupon codes.
     Multi-Property Management: Allow hotel partners to manage multiple properties from a single dashboard.
+    Third-Party API Integration: Connect with external hotel suppliers and channel partners.
