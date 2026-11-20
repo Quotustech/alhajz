@@ -101,3 +101,4 @@ npm start
     Role-based access control for customers, hotel partners, and administrators.
     Centralized error handling and request validation.
     Database operations using MongoDB.
+    Integration with third-party hotel and travel APIs.
