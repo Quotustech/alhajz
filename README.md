@@ -122,3 +122,6 @@ npm start
 
     Category            Technologies
     Frontend            React.js, Next.js, TypeScript
+    State Management    Redux Toolkit
+    
+    
