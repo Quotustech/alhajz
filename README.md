@@ -148,3 +148,6 @@ npm start
     Developed responsive user interfaces to ensure a seamless booking experience across different screen sizes.
     Integrated booking confirmation workflows to provide customers with reservation details after successful bookings.
     Implemented form validation and error handling to improve data accuracy during the booking process.
+
+Extranet – Hotel Management System
+
