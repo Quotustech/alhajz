@@ -137,3 +137,4 @@ npm start
     Implemented advanced search functionality with location, check-in, check-out, room, adult, and child selection.
     Integrated dynamic hotel listing pages to display property details, room categories, available amenities, and pricing information.
     Implemented real-time availability checking to retrieve available rooms based on selected travel dates.
+    Developed a room selection system that allows users to compare room categories, occupancy limits, and pricing.
