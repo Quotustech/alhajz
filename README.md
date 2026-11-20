@@ -125,4 +125,5 @@ npm start
     State Management    Redux Toolkit
     Backend            	Node.js, Express.js
     Database	        MongoDB, PostgreSQL
+    ORM	                Prisma
     
