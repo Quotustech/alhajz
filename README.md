@@ -142,3 +142,4 @@ npm start
     Implemented a promotional discount system to apply eligible offers and coupon codes during the booking process.
     Developed an add-on services module to allow customers to select additional facilities while making reservations.
     Implemented a wishlist feature that allows authenticated users to save and manage their favorite properties.
+    Created user profile management functionality for updating personal information and managing account details.
