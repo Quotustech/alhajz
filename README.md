@@ -84,3 +84,5 @@ npm start
     User profile management and booking-related notifications.
 
 2. Extranet (Hotel Partner Dashboard)
+    Centralized hotel management dashboard.
+    Manage multiple properties, room types, and room configurations.
