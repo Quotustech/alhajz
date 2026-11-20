@@ -174,3 +174,4 @@ npm start
     Created reusable middleware for authentication, authorization, validation, and error handling.
     Developed CRUD operations for managing properties, rooms, users, reservations, and hotel configurations.
     Implemented database queries and aggregation operations to retrieve and process hotel-related information.
+    Integrated external hotel supplier APIs to retrieve property information, room availability, and pricing data.
