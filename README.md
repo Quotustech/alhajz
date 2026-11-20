@@ -162,3 +162,4 @@ Extranet – Hotel Management System
     Implemented configurable booking restrictions, including minimum length of stay and maximum length of stay.
     Developed promotional management modules for creating and managing hotel-specific offers.
     Implemented property-specific pricing rules and availability configurations.
+    Created administrative interfaces for managing hotel images, descriptions, policies, and contact information.
