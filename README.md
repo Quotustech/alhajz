@@ -153,3 +153,4 @@ Extranet – Hotel Management System
     Developed a centralized hotel administration dashboard for managing property-related operations.
     Implemented property registration and configuration functionality for hotel partners.
     Created modules for managing hotel information, room categories, facilities, and property descriptions.
+    Developed room inventory management functionality to maintain room availability and allocation.
