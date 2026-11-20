@@ -176,3 +176,4 @@ npm start
     Implemented database queries and aggregation operations to retrieve and process hotel-related information.
     Integrated external hotel supplier APIs to retrieve property information, room availability, and pricing data.
     Implemented centralized response handling to maintain consistent API response structures.
+    Developed request validation to prevent invalid or incomplete data from entering the application.
