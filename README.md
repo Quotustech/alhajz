@@ -164,3 +164,4 @@ Extranet – Hotel Management System
     Implemented property-specific pricing rules and availability configurations.
     Created administrative interfaces for managing hotel images, descriptions, policies, and contact information.
     Developed booking reports and dashboard summaries to help hotel partners monitor reservation activity.
+    Implemented role-based access to restrict administrative operations according to user permissions.
