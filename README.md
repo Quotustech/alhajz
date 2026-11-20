@@ -182,3 +182,6 @@ npm start
     Implemented pagination and filtering mechanisms for handling large datasets efficiently.
     Developed booking-related business logic to manage reservation creation, confirmation, and cancellation.
     Integrated third-party services to extend the platform's booking and payment capabilities.
+
+🔥 Advanced Business Logic
+    Implemented dynamic pricing calculations based on check-in dates, checkout dates, room occupancy, and applicable pricing policies.
