@@ -180,3 +180,4 @@ npm start
     Implemented error logging and debugging mechanisms to identify and resolve backend issues.
     Optimized database queries to improve API response times and application performance.
     Implemented pagination and filtering mechanisms for handling large datasets efficiently.
+    Developed booking-related business logic to manage reservation creation, confirmation, and cancellation.
