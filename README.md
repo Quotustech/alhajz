@@ -190,3 +190,4 @@ npm start
     Developed extra guest pricing calculations based on room occupancy configurations.
     Implemented tourist tax and additional charge calculations within the booking price breakdown.
     Created booking validation mechanisms to verify room availability before proceeding with reservations.
+    Implemented cancellation and modification workflows based on configured property policies.
