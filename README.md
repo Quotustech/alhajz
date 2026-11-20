@@ -102,3 +102,4 @@ npm start
     Centralized error handling and request validation.
     Database operations using MongoDB.
     Integration with third-party hotel and travel APIs.
+    Booking lifecycle and reservation management.
