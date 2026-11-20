@@ -81,5 +81,6 @@ npm start
     Booking price calculation, including taxes, additional charges, and discounts.
     Booking history and reservation management.
     Wishlist functionality to save favorite hotels.
+    User profile management and booking-related notifications.
 
 2. Extranet (Hotel Partner Dashboard)
