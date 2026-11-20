@@ -171,3 +171,4 @@ npm start
     Implemented modular backend architecture to separate business logic, controllers, routes, and database operations.
     Developed secure authentication and authorization mechanisms using JWT.
     Implemented password encryption and verification using bcrypt.
+    Created reusable middleware for authentication, authorization, validation, and error handling.
