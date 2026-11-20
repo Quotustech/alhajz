@@ -115,3 +115,4 @@ npm start
     Multi-Property Management: Allow hotel partners to manage multiple properties from a single dashboard.
     Third-Party API Integration: Connect with external hotel suppliers and channel partners.
     Booking Management: Handle the complete reservation lifecycle, from booking creation to confirmation and cancellation.
+    Responsive Design: Provide a consistent user experience across desktop, tablet, and mobile devices.
