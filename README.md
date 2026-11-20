@@ -157,3 +157,4 @@ Extranet – Hotel Management System
     Implemented calendar-based rate management for updating room prices across different dates.
     Created pricing configuration modules to manage seasonal rates, promotional prices, and occupancy-based pricing.
     Implemented booking management functionality for viewing and processing customer reservations.
+    Developed reservation status management to track booking confirmations, modifications, and cancellations.
