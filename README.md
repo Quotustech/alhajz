@@ -107,3 +107,6 @@ npm start
     API response handling and data validation.
 
 #Advanced Functionalities
+
+🔥 Advanced Platform Capabilities
+
