@@ -99,3 +99,4 @@ npm start
     Secure authentication and authorization using JWT.
     Password hashing and validation using bcrypt.
     Role-based access control for customers, hotel partners, and administrators.
+    Centralized error handling and request validation.
