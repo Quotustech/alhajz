@@ -95,3 +95,4 @@ npm start
     Manage hotel amenities, room facilities, and property images.
 
 3. Backend API
+    Modular REST API architecture using Node.js and Express.js.
