@@ -127,3 +127,4 @@ npm start
     Database	        MongoDB, PostgreSQL
     ORM	                Prisma
     Caching	            Redis
+    Authentication	    JWT, bcrypt
