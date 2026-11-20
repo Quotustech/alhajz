@@ -110,3 +110,4 @@ npm start
 
 🔥 Advanced Platform Capabilities
     Dynamic Pricing: Automatically calculate room prices based on occupancy, dates, and applicable pricing rules.
+    Inventory Management: Maintain room availability and prevent overbooking.
