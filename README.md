@@ -119,3 +119,6 @@ npm start
     Data Synchronization: Synchronize hotel information, room availability, and pricing between integrated systems.
 
 #Technologies Used
+
+    Category            Technologies
+    
