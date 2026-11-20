@@ -92,3 +92,4 @@ npm start
     Manage seasonal pricing and special promotional rates.
     View, confirm, modify, and cancel guest reservations.
     Monitor booking statistics and property performance.
+    Manage hotel amenities, room facilities, and property images.
