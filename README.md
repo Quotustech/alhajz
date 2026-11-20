@@ -130,3 +130,4 @@ npm start
     Authentication	    JWT, bcrypt
     Real-time Communication	Socket.IO
     API Testing	        Postman
+    Version Control	    Git, GitHub
