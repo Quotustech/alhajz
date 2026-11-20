@@ -144,3 +144,4 @@ npm start
     Implemented a wishlist feature that allows authenticated users to save and manage their favorite properties.
     Created user profile management functionality for updating personal information and managing account details.
     Integrated booking history functionality to help users track their previous and upcoming reservations.
+    Implemented authentication-based navigation to protect booking-related features and user-specific information.
