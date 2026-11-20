@@ -121,4 +121,4 @@ npm start
 #Technologies Used
 
     Category            Technologies
-    
+    Frontend            React.js, Next.js, TypeScript
