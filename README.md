@@ -74,5 +74,6 @@ npm start
 1. Booking Engine
     Advanced hotel search with location, check-in, check-out, guest, and room filters.
     Real-time hotel availability and pricing based on selected dates.
+    Dynamic room pricing based on occupancy and booking conditions.
 
 2. Extranet (Hotel Partner Dashboard)
