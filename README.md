@@ -167,3 +167,4 @@ npm start
     Implemented role-based access to restrict administrative operations according to user permissions.
 
 #Backend – API Development
+    Designed and developed RESTful APIs to support communication between the Booking Engine, Extranet, and backend services.
