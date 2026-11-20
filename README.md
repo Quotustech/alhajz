@@ -105,3 +105,5 @@ npm start
     Booking lifecycle and reservation management.
     Dynamic pricing and availability calculation.
     API response handling and data validation.
+
+#Advanced Functionalities
