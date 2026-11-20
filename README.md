@@ -78,5 +78,6 @@ npm start
     Room selection with detailed descriptions, images, amenities, and facilities.
     Add-on services and extra facilities during the booking process.
     Promotional offers, discount coupons, and special deals.
+    Booking price calculation, including taxes, additional charges, and discounts.
 
 2. Extranet (Hotel Partner Dashboard)
