@@ -177,3 +177,4 @@ npm start
     Integrated external hotel supplier APIs to retrieve property information, room availability, and pricing data.
     Implemented centralized response handling to maintain consistent API response structures.
     Developed request validation to prevent invalid or incomplete data from entering the application.
+    Implemented error logging and debugging mechanisms to identify and resolve backend issues.
