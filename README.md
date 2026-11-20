@@ -145,3 +145,4 @@ npm start
     Created user profile management functionality for updating personal information and managing account details.
     Integrated booking history functionality to help users track their previous and upcoming reservations.
     Implemented authentication-based navigation to protect booking-related features and user-specific information.
+    Developed responsive user interfaces to ensure a seamless booking experience across different screen sizes.
