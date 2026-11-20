@@ -86,3 +86,4 @@ npm start
 2. Extranet (Hotel Partner Dashboard)
     Centralized hotel management dashboard.
     Manage multiple properties, room types, and room configurations.
+    Update room rates and availability through a calendar-based interface.
