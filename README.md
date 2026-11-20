@@ -87,3 +87,4 @@ npm start
     Centralized hotel management dashboard.
     Manage multiple properties, room types, and room configurations.
     Update room rates and availability through a calendar-based interface.
+    Manage inventory and room allocation.
