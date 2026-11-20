@@ -151,3 +151,4 @@ npm start
 
 Extranet – Hotel Management System
     Developed a centralized hotel administration dashboard for managing property-related operations.
+    Implemented property registration and configuration functionality for hotel partners.
