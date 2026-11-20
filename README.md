@@ -72,5 +72,7 @@ npm start
 
 # Additional Key Features
 1. Booking Engine
+    Advanced hotel search with location, check-in, check-out, guest, and room filters.
+    
 
 2. Extranet (Hotel Partner Dashboard)
