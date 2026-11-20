@@ -149,7 +149,7 @@ npm start
     Integrated booking confirmation workflows to provide customers with reservation details after successful bookings.
     Implemented form validation and error handling to improve data accuracy during the booking process.
 
-Extranet – Hotel Management System
+#Extranet – Hotel Management System
     Developed a centralized hotel administration dashboard for managing property-related operations.
     Implemented property registration and configuration functionality for hotel partners.
     Created modules for managing hotel information, room categories, facilities, and property descriptions.
@@ -165,3 +165,5 @@ Extranet – Hotel Management System
     Created administrative interfaces for managing hotel images, descriptions, policies, and contact information.
     Developed booking reports and dashboard summaries to help hotel partners monitor reservation activity.
     Implemented role-based access to restrict administrative operations according to user permissions.
+
+#Backend – API Development
